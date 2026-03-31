@@ -1,16 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for #to start a flask app, render html templates, handle requests, and redirect users
+import os
+from flask import Flask, render_template, request, redirect, url_for, session #to start a flask app, render html templates, handle requests, redirect users, and manage sessions
+from logic import get_random_event # Import the function to get random events when entering a floor
+from data import STARTING_ITEMS # Import the starting items for the player's inventory
+
 import random
 
-app = Flask(__name__)
+
+#Get the directory of the current file to use for loading assets (app.py) and templates (index.html)
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+templates_dir = os.path.join(base_dir, '..', 'frontend', 'templates')
+static_dir = os.path.join(base_dir, '..', 'frontend', 'static')
+
+app = Flask(__name__, template_folder=templates_dir, static_folder=static_dir) # Create a Flask application instance, specifying the directories for templates and static files.
 app.secret_key = 'dungeonmaster' # Set a secret key for session management
-
-STARTING_ITEMS = [
-    { "id": 1, "name": "Copper Shortsword", "type": "Weapon", "stat": {"attack": 5}, "description": "A basic shortsword made of copper. It has a dull blade and is not very effective in combat." },
-    { "id": 2, "name": "Wooden Shield", "type": "Secondary", "stat": {"defense": 3}, "description": "A simple wooden shield. It provides minimal protection and is easily damaged." },
-    { "id": 3, "name": "Leather Armor", "type": "Armor", "stat": {"defense": 4}, "description": "Basic leather armor. It offers some protection but is not very durable." }
-    ]
-
-ITEM_POOL = [] 
 
 def initialize_game():
     session['floor'] = 0
@@ -30,3 +33,6 @@ def index():
                             inventory=session['inventory'], 
                             health=session['health'], 
                             log=session['log'])
+
+if __name__ == '__main__':
+    app.run(debug=True)

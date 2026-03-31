@@ -1,0 +1,50 @@
+/* The Classic 90s Web Look */
+body { 
+    background-color: #000000; 
+    color: #00FFFF; /* Electric Cyan */
+    font-family: "Times New Roman", Times, serif; 
+    padding: 20px;
+    /* A thick grey border around the whole page like an old app */
+    border: 10px ridge #808080;
+    min-height: 100vh;
+}
+
+.game-container { 
+    border: 4px outset #C0C0C0; /* Windows 95 Button Look */
+    background-color: #000000;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.stats-bar {
+    border: 2px inset #808080;
+    padding: 10px;
+    color: #FFFF00; /* Bright Yellow */
+    margin-bottom: 20px;
+    background: #000044; /* Dark Blue contrast */
+}
+
+.log-box { 
+    background-color: #000000; 
+    border: 3px inset #808080; 
+    height: 300px; 
+    overflow-y: scroll; 
+    padding: 15px; 
+    color: #00FF00; /* Matrix Green */
+    font-family: "Courier New", Courier, monospace;
+}
+
+.button-action { 
+    background-color: #C0C0C0; 
+    color: #000000; 
+    border: 3px outset #ffffff; 
+    padding: 10px 20px; 
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.button-action:active {
+    border: 3px inset #ffffff;
+}
