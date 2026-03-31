@@ -20,6 +20,7 @@ def initialize_game():
     session['inventory'] = list(STARTING_ITEMS) # Start with a copy of the starting items
     session['health'] = 100
     session['log'] = ["You stand before the entrance of a dark, assumed to be, long abandoned dungeon. The air is thick with the scent of damp stone and decay. You can feel a chill run down your spine as you step inside, the darkness swallowing you whole. There ought to be riches and treasures hidden within, but also dangers lurking in the shadows. You must be cautious as you explore the depths of this ancient place."]
+    session['state'] = 'empty'
 
 @app.route('/')
 def index():
@@ -32,7 +33,28 @@ def index():
                             floor=session['floor'], 
                             inventory=session['inventory'], 
                             health=session['health'], 
-                            log=session['log'])
+                            log=session['log'],
+                            state=session.get('state', 'empty'))
+
+@app.route('/descend')
+def descend():
+    if 'floor' not in session:
+        initialize_game()
+    
+    session['floor'] += 1
+    event = get_random_event(session['floor'])
+    session['state'] = event['type']
+    session['log'].append(event['text'])
+    if 'item' in event:
+        session['inventory'].append(event['item'])
+    
+    return redirect(url_for('index'))
+
+@app.route('/giveup')
+def giveup():
+    session.clear()
+    initialize_game()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

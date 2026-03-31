@@ -4,7 +4,31 @@
 </head>
 <html>
 <body>
-    <h1>Dungeon Crawler Test</h1>
-    <p>Floor: {{ floor }}</p>
+    <div>
+        <div class="actions" style="margin-top: 20px; text-align: center;">
+
+    {% if state == 'empty' or state == 'loot' or floor == 0 %}
+        <p>The path ahead is clear...</p>
+        <a href="{{ url_for('descend') }}">
+            <button class="button-action">DESCEND TO FLOOR {{ floor + 1 }}</button>
+        </a>
+
+    {% elif state == 'combat' %}
+        <p style="color: #FF0000; font-weight: bold;">!!! ENEMY SPOTTED !!!</p>
+        <button class="button-action" onclick="alert('BATTLE SYSTEM COMING SOON')">ATTACK</button>
+        <button class="button-action" style="background-color: #555;">RUN AWAY</button>
+
+    {% elif state == 'boss' %}
+        <h2 style="color: #FF00FF; text-decoration: blink;">THE FINAL BATTLE</h2>
+        <button class="button-action" style="background-color: #FF0000; color: #fff;">CHALLENGE THE DRAGON</button>
+
+    {% endif %}
+    
+    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ccc;">
+        <a href="{{ url_for('giveup') }}">
+            <button class="button-action" style="background-color: #666; opacity: 0.7;">GIVE UP</button>
+        </a>
+    </div>
+    </div>
 </body>
 </html>

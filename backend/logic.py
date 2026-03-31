@@ -1,6 +1,6 @@
-# backend/logic.py
+# This file contains the logic for the game, including the random events that can occur when entering a floor. It uses the item pool from data.py to generate loot events.
 import random
-from data import ITEM_POOL # The dot means "look in the current folder"
+from data import ITEM_POOL # Import the item pool to use for generating loot events
 
 def get_random_event(floor):
     """Decides what happens when you enter a floor."""

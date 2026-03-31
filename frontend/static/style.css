@@ -48,3 +48,31 @@ body {
 .button-action:active {
     border: 3px inset #ffffff;
 }
+
+/* The wrapper for our buttons */
+.actions {
+    border: 3px double #808080;
+    padding: 20px;
+    background-color: #000044; /* Deep blue background for action area */
+    margin-top: 10px;
+}
+
+/* Make the "Descend" button pulse like old web animations */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.button-action {
+    /* ... your existing styles ... */
+    margin: 5px;
+    box-shadow: 3px 3px 0px #000;
+}
+
+/* A special style for the Boss state */
+h2 {
+    font-size: 24px;
+    color: #FF00FF;
+    text-shadow: 2px 2px #000;
+}
